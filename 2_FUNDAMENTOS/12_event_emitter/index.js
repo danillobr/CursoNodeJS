@@ -12,4 +12,4 @@ eventEmitter.emit('start')
 
 console.log('Depois')
 
-//é uma emissão sincrona, segue a lógica de event loop
+//é uma emissão síncrona, segue a lógica de event loop
