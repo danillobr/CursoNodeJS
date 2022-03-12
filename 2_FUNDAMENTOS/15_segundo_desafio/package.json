@@ -1,0 +1,15 @@
+{
+  "name": "15_segundo_desafio",
+  "version": "1.0.0",
+  "description": "segunda tarefa do curso",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Danillo",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "inquirer": "^8.2.1"
+  }
+}
