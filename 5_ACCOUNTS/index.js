@@ -5,6 +5,9 @@ const inquerer = require('inquirer')
 // modulos externos
 const fs = require('fs')
 const Choices = require('inquirer/lib/objects/choices')
+const { inflateRaw } = require('zlib')
+const { get } = require('http')
+const { on } = require('events')
 
 operation()
 
@@ -27,7 +30,7 @@ function operation() {
         if (action === 'Criar Conta') {
             createAccount()
         } else if (action === 'Consultar Saldo') {
-
+            getAccountBalance()
         } else if (action === 'Depositar') {
             deposit()
         } else if (action === 'Sacar') {
@@ -118,7 +121,7 @@ function deposit() {
 // verify if account exists
 function checkAccount(accountName) {
     if (!fs.existsSync(`accounts/${accountName}.json`)) {
-        console.log(chalk.bgRed.black('Esta conta não existe, ecolha outro nome!'))
+        console.log(chalk.bgRed.black('Esta conta não existe, escolha outro nome!'))
         return false
     } else {
         return true
@@ -151,4 +154,23 @@ function getAccount(accountName) {
     })
 
     return JSON.parse(accountJSON)
+}
+
+function getAccountBalance() {
+    inquerer.prompt([{
+        name: 'accountName',
+        message: 'Qual o nome da sua conta?'
+    }]).then((answer) => {
+        const accountName = answer['accountName']
+
+        // verify account exists
+        if (!checkAccount(accountName)) {
+            return getAccountBalance()
+        }
+
+        const accountData = getAccount(accountName)
+
+        console.log(chalk.bgBlue.black(`Olá, o saldo da sua conta é R$${accountData.balance}`))
+        operation()
+    }).catch((err) => console.log(err))
 }
