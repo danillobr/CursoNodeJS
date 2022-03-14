@@ -34,7 +34,7 @@ function operation() {
         } else if (action === 'Depositar') {
             deposit()
         } else if (action === 'Sacar') {
-
+            withdraw()
         } else {
             console.log(chalk.bgBlue.black('Obrigado por usar o Accounts!'));
             process.exit()
@@ -172,5 +172,32 @@ function getAccountBalance() {
 
         console.log(chalk.bgBlue.black(`Olá, o saldo da sua conta é R$${accountData.balance}`))
         operation()
+    }).catch((err) => console.log(err))
+}
+
+// withdraw an amount from user account
+function withdraw() {
+    inquerer.prompt([{
+        name: "accountName",
+        message: "Qual o nome da sua conta?"
+    }]).then((ansewer) => {
+
+        const accountName = ansewer['accountName']
+
+        if (!checkAccount(accountName)) {
+            return withdraw()
+        }
+
+        inquerer.prompt([{
+            name: "amount",
+            message: "Qual valor você deseja sacar?"
+        }]).then((ansewer) => {
+
+            const amount = ansewer['amount']
+
+            console.log(amount)
+
+        }).catch((err) => console.log(err))
+
     }).catch((err) => console.log(err))
 }
