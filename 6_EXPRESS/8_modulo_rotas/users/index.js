@@ -1,24 +1,14 @@
 const express = require('express')
-const app = express()
-const port = 3000 //variável ambiente
-
+const router = express.Router()
 const path = require('path')
-const basePath = path.join(__dirname, 'templates')
 
-// ler o body
-app.use(
-    express.urlencoded({
-        extended: true,
-    }),
-)
+const basePath = path.join(__dirname, '../templates')
 
-app.use(express.json())
-
-app.get('/users/add', (req, res) => {
+router.get('/add', (req, res) => {
     res.sendFile(`${basePath}/userform.html`)
 })
 
-app.post('/users/save', (req, res) => {
+router.post('/save', (req, res) => {
     console.log(req.body)
 
     const name = req.body.name
@@ -29,7 +19,7 @@ app.post('/users/save', (req, res) => {
     res.sendFile(`${basePath}/userform.html`)
 })
 
-app.get('/users/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     const id = req.params.id
 
     // leitura da tabela users, resgatar um usuário do banco
@@ -37,10 +27,4 @@ app.get('/users/:id', (req, res) => {
     res.sendFile(`${basePath}/users.html`)
 })
 
-app.get('/', (req, res) => {
-    res.sendFile(`${basePath}/index.html`)
-})
-
-app.listen(port, () => {
-    console.log(`App rodando na porta ${port}`)
-})
+module.exports = router
