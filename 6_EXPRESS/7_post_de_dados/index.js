@@ -25,6 +25,8 @@ app.post('/users/save', (req, res) => {
     const age = req.body.age
 
     console.log(`O nome do usuário é ${name} e ele tem ${age} anos`);
+
+    res.sendFile(`${basePath}/userform.html`)
 })
 
 app.get('/users/:id', (req, res) => {
