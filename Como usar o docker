@@ -1,0 +1,15 @@
+1 - Para abrir a pasta do linux no windows: cd ~
+2 - Para abrir a posta do projeto pelo vs code dentro do linux: code curso/CursoNodeJS
+
+--------------------------------------------------------------------------------------
+
+1 - Inicar o docer: sudo service docker start
+2 - Apagar tds os containers : docker system prune -a
+3 - Criar um container: docker-compose up -d
+4 - Inicar container: docker-compose start
+
+
+-------------------------------------------------------------------------------------
+
+Comandos do docker:
+    https://github.com/lfnd0/ignite-nodejs/tree/master/04-continuando-aplicacao
